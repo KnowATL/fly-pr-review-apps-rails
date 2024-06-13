@@ -9,7 +9,7 @@ RUN curl -L https://github.com/rbenv/ruby-build/archive/refs/tags/v20240612.tar.
     tar -xz && \
     PREFIX=/usr/local ./ruby-build-*/install.sh
 
-RUN apt-get install -y \
+RUN apt-get update && apt-get install -y \
     autoconf \
     patch \
     build-essential \
@@ -24,7 +24,8 @@ RUN apt-get install -y \
     libgdbm6 \
     libgdbm-dev \
     libdb-dev \
-    uuid-dev
+    uuid-dev && \
+    rm -rf /var/cache/apt/archives /var/lib/apt/lists/*
 
 RUN ruby-build 3.3.2 /opt/rubies/ruby-3.3.2
 ENV PATH="/opt/rubies/ruby-3.3.2/bin:${PATH}"
