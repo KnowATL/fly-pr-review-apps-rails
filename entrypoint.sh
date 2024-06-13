@@ -20,6 +20,8 @@ EVENT_TYPE=$(jq -r .action /github/workflow/event.json)
 app="${INPUT_NAME:-pr-$PR_NUMBER-$GITHUB_REPOSITORY_OWNER-$GITHUB_REPOSITORY_NAME}"
 # Change underscores to hyphens.
 app="${app//_/-}"
+# Change uppercase to lowercase.
+app="${app,,}"
 region="${INPUT_REGION:-${FLY_REGION:-iad}}"
 org="${INPUT_ORG:-${FLY_ORG:-personal}}"
 image="$INPUT_IMAGE"
